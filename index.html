@@ -3,50 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La 2001 - Suplemento</title>
+    <title>La 2001 - Registro de Partidos</title>
     <style>
-        /* Reseteo básico y tipografía retro */
+        /* Reseteo básico y tipografía retro - Web 1.0 Pura */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Verdana, Arial, sans-serif; background-color: #e0e0e0; }
+        body { font-family: Verdana, Arial, sans-serif; background-color: #ffffff; padding: 10px 0; }
 
-        /* Contenedor principal que simula la resolución de pantalla de la época */
+        /* Contenedor principal con borde negro fino perimetral */
         .contenedor-pagina {
             display: flex;
             max-width: 980px;
             min-height: 100vh;
             margin: 0 auto;
             background-color: #ffffff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            border: 0px solid #000000; /* Borde negro fino alrededor de la página */
         }
 
-        /* Columna izquierda (Logo y banda amarilla) */
+        /* Columna izquierda (Banda amarilla con línea negra vertical a la derecha) */
         .columna-izq {
             width: 140px;
-            background-color: #dfa000; /* Amarillo Olé */
+            background-color: #ff9900;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
+            border-right: 5px solid #000000; /* Línea negra vertical separadora */
         }
-        .logo-caja {
-            background-color: #007a33; /* Verde Olé */
+        
+        /* Contenedor del Logo de Olé */
+        .logo-contenedor {
+            background-color: #009933;
             height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-family: 'Arial Black', sans-serif;
-            font-size: 38px;
-            letter-spacing: -2px;
-            border-right: 2px solid #000;
+            border-bottom: 0px solid #000000;
         }
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #009933;
+        }
+
         .link-web {
-            color: white;
-            font-size: 10px;
+            color: #ffffff;
+            font-size: 11px;
             font-weight: bold;
             text-align: center;
-            padding: 5px;
+            padding: 8px 5px;
             text-decoration: none;
+            font-family: Arial, sans-serif;
         }
+        .link-web:hover { text-decoration: underline; }
 
         /* Columna derecha (Contenido principal) */
         .columna-der {
@@ -55,107 +63,130 @@
             flex-direction: column;
         }
 
-        /* Cabecera verde superior */
+        /* Cabecera verde superior con margen inferior para el espacio en blanco */
         .cabecera-verde {
-            background-color: #007a33;
+            background-color: #009933;
             height: 90px;
-            color: black;
+            color: #ffffff;
             font-size: 11px;
             padding: 50px 0 0 15px;
+            font-weight: bold;
+            border-bottom: 0px solid #000000;
+            margin-bottom: 30px; /* Leve separación de espacio en blanco solicitada */
         }
 
         /* Banner del Suplemento */
-        .banner-suple {
-            background-color: #a3c4a8; /* Verde desaturado */
-            height: 80px;
+        .banner-suple-contenedor {
+            background-color: #ffffff;
+            height: 85px;
+            border-top: 0px solid #000000;
+            border-bottom: 0px solid #000000;
             display: flex;
             align-items: center;
-            padding-left: 20px;
-            border-bottom: 2px solid #ccc;
+            image-rendering:optimizeSpeed;
         }
-        .banner-suple h1 {
-            font-family: 'Arial Black', sans-serif;
-            font-size: 36px;
-            font-style: italic;
-            color: #444;
-            margin-left: 10px;
+        .banner-placeholder {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background-color: #e8ede9;
         }
 
-        /* Área de contenido (Artículo + Sidebar derecha) */
-        .contenido-principal {
+        /* SECCIÓN ANCHA: Encabezado de la nota (Toma todo el ancho del cuerpo) */
+        .articulo-encabezado {
+            padding: 20px 20px 10px 20px;
+        }
+        .fecha { font-size: 11px; color: #333333; margin-bottom: 10px; font-weight: bold; }
+        .volanta { font-size: 11px; color: #ff9900; font-weight: bold; margin-bottom: 5px; text-transform: uppercase; }
+        .titulo { font-size: 34px; font-weight: bold; margin-bottom: 15px; line-height: 1.1; color: #000000; letter-spacing: -1px; }
+        .bajada { font-size: 14px; font-weight: bold; margin-bottom: 15px; color: #222222; line-height: 1.4; }
+        .autor { font-size: 10px; color: #555555; text-align: right; border-bottom: 1px solid #000000; padding-bottom: 5px; margin-bottom: 15px; font-weight: bold; }
+
+        /* SECCIÓN DIVIDIDA: Distribución del texto de la nota y la Sidebar */
+        .cuerpo-distribucion {
             display: flex;
-            padding: 20px;
+            padding: 0 20px 20px 20px;
             gap: 20px;
         }
 
-        /* Artículo Principal */
-        .articulo { flex-grow: 1; }
-        .fecha { font-size: 11px; color: #666; margin-bottom: 10px; }
-        .volanta { font-size: 10px; color: #333; margin-bottom: 5px; }
-        .titulo { font-size: 32px; font-weight: bold; margin-bottom: 15px; line-height: 1.1; }
-        .bajada { font-size: 14px; font-weight: bold; margin-bottom: 20px; }
-        .autor { font-size: 10px; color: #666; text-align: right; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 15px; }
+        /* Texto de la nota */
+        .articulo-cuerpo {
+            flex-grow: 1;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #000000;
+            text-align: justify;
+        }
+        .articulo-cuerpo p { margin-bottom: 15px; }
         
-        .texto-cuerpo { font-size: 13px; line-height: 1.5; color: #000; text-align: justify; }
-        .texto-cuerpo p { margin-bottom: 15px; }
-        
-        /* Letra Capital (Drop Cap) */
+        /* Letra Capital */
         .dropcap {
             float: left;
-            font-size: 36px;
+            font-size: 38px;
             font-weight: bold;
             line-height: 1;
             margin-right: 5px;
-            margin-top: -4px;
+            margin-top: -2px;
+            color: #000000;
         }
 
-        /* Imagen flotante en el texto */
+        /* Imagen flotante de la nota */
         .foto-partido {
             float: left;
-            width: 200px;
+            width: 220px;
             margin: 5px 15px 15px 0;
-            border: 1px solid #000;
+            border: 1px solid #000000;
         }
         .foto-partido img { width: 100%; display: block; }
-        .epigrafe { background: #000; color: #fff; font-size: 9px; padding: 5px; font-weight: bold; }
+        .epigrafe { background: #000000; color: #ffffff; font-size: 9px; padding: 5px; font-weight: bold; line-height: 1.2; }
 
-        /* Sidebar Derecha (Cajas de módulos) */
+        /* Sidebar Derecha (Alineada desde el inicio del párrafo) */
         .sidebar-der {
-            width: 200px;
+            width: 210px;
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
-        .caja-modulo { border: 1px solid #ccc; background: #eee; }
+        .caja-modulo { border: 1px solid #000000; background: #ffffff; }
         .caja-header {
-            background-color: #000;
-            color: #fff;
+            background-color: #000000;
+            color: #ffffff;
             font-size: 11px;
             font-weight: bold;
             padding: 4px 8px;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            text-transform: uppercase;
         }
-        .caja-body { padding: 10px; text-align: center; background: #fff; }
-        .caja-body h3 { font-size: 18px; color: #000; }
+        .caja-body { padding: 10px; text-align: center; background: #ffffff; }
+        .caja-body h3 { font-size: 16px; color: #000000; font-weight: bold; text-decoration: underline; }
         
-        /* Lista de Suplementos Anteriores */
-        .lista-suples { list-style: none; text-align: left; font-size: 11px; background: #fff; padding: 5px; }
-        .lista-suples li { margin-bottom: 4px; }
-        .lista-suples a { color: #000; text-decoration: underline; }
+        /* Imagen dentro de módulos de la derecha */
+        .imagen-modulo {
+            width: 100%;
+            display: block;
+            border: 0px solid #000000;
+            image-rendering: optimizeSpeed;
+        }
 
-        /* Footer */
+        /* Lista de Suplementos Anteriores */
+        .lista-suples { list-style: none; text-align: left; font-size: 11px; padding: 5px 0; }
+        .lista-suples li { margin-bottom: 6px; font-weight: 100px; }
+        .lista-suples a { color: #000000; text-decoration: underline; }
+        .lista-suples a:hover { color: #ff9900; }
+
+        /* Footer Plano */
         footer {
-            border-top: 4px solid #eee;
+            border-top: 15px solid #e4e4e4;
             padding: 15px 20px;
             font-size: 10px;
-            color: #000;
+            color: #000000;
+            font-weight:100;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: auto; /* Empuja el footer al fondo si hay poco texto */
+            margin-top: auto;
+            background-color: #ffffff;
+            image-rendering: optimizeSpeed;
         }
     </style>
 </head>
@@ -164,8 +195,10 @@
 <div class="contenedor-pagina">
     
     <div class="columna-izq">
-        <div class="logo-caja">Olé</div>
-        <a href="#" class="link-web">www.la2001.com.ar</a>
+        <div class="logo-contenedor">
+            <img src="imgs/ole_logo_v3.jpg" alt="Logo Olé" class="logo-placeholder">
+        </div>
+        <a href="#" class="link-web">www.ole.com.ar</a>
     </div>
 
     <div class="columna-der">
@@ -173,58 +206,71 @@
         <div class="cabecera-verde">
             Buenos Aires<br>República Argentina
         </div>
-        <div class="banner-suple">
-            <h1>Suple 2001</h1>
+        
+        <div class="banner-suple-contenedor">
+            <img src="imgs/suple_ref_V2.png" alt="Suple 2001" class="banner-placeholder">
         </div>
 
-        <div class="contenido-principal">
-            
-            <div class="articulo">
-                <div class="fecha">Miércoles 01 de agosto de 2001</div>
-                <div class="volanta">AMISTOSO: LA 2001 VS LOS PIBES</div>
-                <div class="titulo">"Más de lo que hice no puedo"</div>
-                <div class="bajada">Desde las canchas de pasto sintético, el equipo demuestra que la magia sigue intacta a pesar del estado físico, y que el tercer tiempo ya está asegurado.</div>
-                <div class="autor">POR LA REDACCIÓN. contacto@la2001.com.ar</div>
+        <div class="articulo-encabezado">
+            <div class="fecha">Miércoles 01 de agosto de 2001</div>
+            <div class="volanta">EL PARTIDO DE LA FECHA</div>
+            <div class="titulo">"Más de lo que hice no puedo"</div>
+            <div class="bajada">Desde la concentración de La Coruña, el Turu Flores dice que resignó plata para jugar en River y que ya no depende de él que el préstamo se concrete.</div>
+            <div class="autor">PABLO CHIAPPETTA. pchiappetta@ole.com.ar</div>
+        </div>
 
-                <div class="texto-cuerpo">
-                    <div class="foto-partido">
-                        <img src="https://via.placeholder.com/200x150/cccccc/000000?text=Foto+del+Partido" alt="Partido">
-                        <div class="epigrafe">El capitán, en el primer amistoso de la semana. Ayer ni siquiera corrió.</div>
-                    </div>
-                    
-                    <p><span class="dropcap">L</span>a voz del equipo oscilaba entre la resignación y la incredulidad. No comprendía por qué, ahora que habían alquilado la cancha de 11, los pases no se concretaban. "No entiendo nada. El lunes me dijeron que hoy me confirmaban la táctica y todavía estoy esperando que bajen a defender", cuenta apesadumbrado a diez minutos de las 23, la hora fijada para que no le pasen más llamados, en pleno vestuario.</p>
-                    
-                    <p>En ese momento, en Buenos Aires los dirigentes del equipo recibían la negativa del arquero en un mensaje de WhatsApp en el que pedía que le pagaran el alquiler de la cancha no al contado, sino en cómodas cuotas.</p>
-                    
-                    <p>Impaciencia. El equipo había consumido el martes esperando escuchar la confirmación del asado, mientras sus compañeros le ganaban 3 a 0 al equipo rival con goles de rebote. Y sí, estoy un poco ansioso porque quiero saber rápido si tengo que correr o me quedo acá abajo, acepta la defensa.</p>
+        <div class="cuerpo-distribucion">
+            
+            <div class="articulo-cuerpo">
+                <div class="foto-partido">
+                    <img src="assets/foto_partido.jpg" alt="Foto Nota">
+                    <div class="epigrafe">El Turu, en el primer amistoso de La Coruña, el lunes. Ayer ni siquiera jugó.</div>
                 </div>
+                
+                <p><span class="dropcap">L</span>a voz del Turu Flores oscilaba entre la resignación y la incredulidad. No comprendía por qué, ahora que La Coruña aceptó cederlo en 550 mil dólares, su préstamo a River no se concretaba. "No entiendo nada. El lunes me dijeron que hoy (por ayer) me confirmaban y todavía estoy esperando que me llamen", cuenta apesadumbrado a diez minutos de las 23, la hora fijada para que no le pasen más llamadas, en la concentración de Vilalba.</p>
+                
+                <p>En ese momento, en Buenos Aires los dirigentes de River recibían la negativa de La Coruña al fax en el que pedían que el pase se pagara al contado sino en cómodas cuotas.</p>
+                
+                <p>Impaciencia. Flores había consumido el martes esperando escuchar la confirmación del pase en la voz de su representante, Daniel Comba, mientras sus compañeros le ganaban 3 a 0 al Lemos, un equipo de Tercera, con goles de Makaay, Pandiani y Tristán. Estos tres son, justamente, los atacantes que lo relegaron a él en el gusto del técnico Javier Irureta. "Me quedé afuera con diez jugadores. Y sí, estoy un poco ansioso porque quiero saber rápido si tengo que viajar o me quedo acá", acepta la debilidad de Ramón Díaz.</p>
             </div>
 
             <div class="sidebar-der">
                 
                 <div class="caja-modulo">
-                    <div class="caja-header">[+] Más información</div>
+                    <div class="caja-header"> <img src="imgs/estadisticas.jpg" alt="MasInfo"></div>
                     <div class="caja-body">
                         <h3>La Formación</h3>
+                        <h3>Los Goleadores</h3>
+                        <h3>El 1 X 1</h3>
                         </div>
                 </div>
 
                 <div class="caja-modulo">
-                    <div class="caja-header">Suples anteriores</div>
-                    <ul class="lista-suples">
-                        <li>➔ <a href="#">2001-07-25</a></li>
-                        <li>➔ <a href="#">2001-07-18</a></li>
-                        <li>➔ <a href="#">2001-07-11</a></li>
-                        <li>➔ <a href="#">2001-07-04</a></li>
-                    </ul>
+                    <div class="caja-header"><img src="imgs/lasfanas.png" alt="Las Fanáticas"></div>
+                    <div style="padding: 5px;">
+                        <img src="imgs/baner_fan.gif" alt="Fanática de la fecha" class="imagen-modulo">
+                    </div>
+                </div>
+
+                <div class="caja-modulo">
+                    <div class="caja-header"><img src="imgs/suplesAnteriores.jpg" alt="SuplesAnteriores"></div>
+                    <div style="padding: 10px;">
+                        <ul class="lista-suples">
+                            <li>➔ <a href="#">2001-07-25</a></li>
+                            <li>➔ <a href="#">2001-07-18</a></li>
+                            <li>➔ <a href="#">2001-07-11</a></li>
+                            <li>➔ <a href="#">2001-07-04</a></li>
+                            <li>➔ <a href="#">2001-06-27</a></li>
+                        </ul>
+                    </div>
                 </div>
                 
             </div>
         </div>
 
         <footer>
-            <div>© Copyright 2026 La 2001<br>All rights reserved</div>
-            <div>[Logo de ustedes aquí]</div>
+            <div>© Copyright 1998-2026 Olé<br>All rights reserved</div>
+            <div> <img src="imgs/grupo2.gif" alt="Logo Grupo Clarin"> <img src="imgs/erpLogo.png" alt="LogoOlé"></div>
         </footer>
 
     </div>
